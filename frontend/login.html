@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - RossFin</title>
+
+    <!-- Links -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/moneyicon.png" type="image/x-icon">
+
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen font-[Montserrat]">
+    
+     <!-- Campo de Login -->
+    <div class="bg-black/50 px-4 py-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl text-center text-white mb-6">Login</h2>
+
+         <form id="login-form">
+            <!-- Campo de E-mail -->
+             <div class="mb-4"> 
+                <label for="email" class="block text-sm font-medium text-gray-400">E-mail</label>
+                <input type="email" id="email" name="email" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite seu e-mail" required>
+             </div>
+             <!-- Campo de Senha -->
+              <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-400">Senha</label>
+                <input type="password" id="password" name="senha" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite sua senha" required>
+              </div>
+              <!-- Botão de Login -->
+              <button type="submit" class="w-full py-2 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Entrar</button>
+            </form>
+
+            <div class="mt-4 text-center">
+                <p class="text-sm text-gray-600">Não tem uma conta? <a href="register.html" class="text-blue-500 hover:text-blue-700">Cadastre-se</a></p>
+            </div>
+    </div>
+</body>
+
+<script>
+  document.getElementById('login-form').addEventListener('submit', async function (event) {
+      event.preventDefault(); // impede o envio padrão do form
+  
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('password').value;
+  
+      try {
+          const resposta = await fetch('http://localhost:3000/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, senha })
+          });
+  
+          const dados = await resposta.json();
+  
+          if (resposta.ok) {
+              alert(dados.message); // Exibe: Login bem-sucedido!
+          } else {
+              alert(dados.message); // Exibe: E-mail ou senha incorretos
+          }
+      } catch (erro) {
+          alert('Erro ao conectar com o servidor.');
+          console.error(erro);
+      }
+  });
+  </script>
+  
+</html>

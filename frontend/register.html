@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se - RossFin</title>
+
+    <!-- Links -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/moneyicon.png" type="image/x-icon">
+
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 flex justify-center items-center min-h-screen font-[Montserrat]">
+    
+    <!-- Campo de Cadastro -->
+    <div class="bg-black/50 px-4 py-8 rounded-lg shadow-lg">
+        <h2 class="text-2xl text-center text-white mb-6">Crie uma Conta</h2>
+
+        <form id="signup-form">
+            <!-- Campo de Nome + Sobrenome -->
+            <div class="mb-4 flex space-x-4">
+                <!-- Campo Nome -->
+                <div class="w-1/2">
+                    <label for="name" class="block text-sm font-medium text-gray-400">Nome</label>
+                    <input type="text" id="name" name="name" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite seu nome" required>
+                </div>
+            
+                <!-- Campo Sobrenome -->
+                <div class="w-1/2">
+                    <label for="last_name" class="block text-sm font-medium text-gray-400">Sobrenome</label>
+                    <input type="text" id="last_name" name="last_name" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite seu sobrenome" required>
+                </div>
+            </div>
+            
+            <!-- Campo de E-mail -->
+            <div class="mb-4"> 
+                <label for="email" class="block text-sm font-medium text-gray-400">E-mail</label>
+                <input type="email" id="email" name="email" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite seu e-mail" required>
+            </div>
+            
+            <!-- Campo de Senha -->
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-400">Senha</label>
+                <input type="password" id="password" name="senha" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite sua senha" required>
+            </div>
+            
+            <!-- Campo de Confirmação de Senha -->
+            <div class="mb-4">
+                <label for="confirm_password" class="block text-sm font-medium text-gray-400">Confirmação Senha</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="mt-2 p-2 w-full border bg-white/80 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500" placeholder="Digite novamente sua senha" required>
+            </div>
+
+            <!-- Botão de Cadastro -->
+            <button type="submit" class="w-full py-2 bg-blue-900 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Registrar-se</button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <p class="text-sm text-gray-600">Já tem uma conta? <a href="login.html" class="text-blue-500 hover:text-blue-700">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Lógica para garantir que as senhas são iguais antes de enviar o formulário
+        document.getElementById('signup-form').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Impede o envio do formulário padrão
+
+            const nome = document.getElementById("name").value;
+            const sobrenome = document.getElementById("last_name").value;
+            const email = document.getElementById("email").value;
+            const senha = document.getElementById("password").value;
+            const confirm_password = document.getElementById("confirm_password").value;
+
+            // Validação de senhas
+            if (senha !== confirm_password) {
+                alert("As senhas não coincidem.");
+                return;
+            }
+
+            // Envio do cadastro via fetch
+            try {
+                const response = await fetch("http://localhost:3000/cadastro", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        nome,
+                        sobrenome,
+                        email,
+                        senha
+                    })
+                });
+
+                const data = await response.json();
+                alert(data.message); // Exibe a resposta do servidor
+            } catch (error) {
+                console.error("Erro ao enviar dados:", error);
+                alert("Erro ao enviar dados para o servidor.");
+            }
+        });
+    </script>
+</body>
+</html>
