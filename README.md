@@ -33,9 +33,11 @@ Este projeto utiliza as seguintes tecnologias:
 Aqui estão algumas capturas de tela do que foi desenvolvido até agora:
 
 - **Página de Cadastro**: Tela onde o usuário pode criar uma conta, fornecendo nome, sobrenome, e-mail e senha.
-  ![screencapture-127-0-0-1-5500-frontend-register-html-2025-04-22-17_00_59](https://github.com/user-attachments/assets/37f6180c-eb3d-4181-a623-3744b149ba8e)
+![screencapture-127-0-0-1-5500-frontend-register-html-2025-04-22-17_00_59](https://github.com/user-attachments/assets/e43adff0-5f6d-437c-9803-8a77a00e3514)
+
 - **Página de Login**: Tela onde o usuário pode fazer login usando o e-mail e a senha cadastrados.
-![screencapture-127-0-0-1-5500-frontend-login-html-2025-04-22-17_03_10](https://github.com/user-attachments/assets/86692437-2909-4b68-ba1a-857b610fb946)
+![screencapture-127-0-0-1-5500-frontend-login-html-2025-04-22-17_03_10](https://github.com/user-attachments/assets/f284d5d7-cb95-4d60-b2ff-500900fd2e3a)
+
 ---
 
 ## 📦 Funcionalidades já disponíveis
