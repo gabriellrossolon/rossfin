@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Rossfin</title>
+
+    <!-- Links -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../assets/moneyicon.png" type="image/x-icon">
+
+     <!-- Scripts -->
+     <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-900 flex justify-center items-center min-h-screen font-[Montserrat]">
+    <div class="bg-white/50 rounded p-8 flex flex-col items-center space-y-8">
+        <h1 class="text-blue-900 text-2xl">Essa é a dashboard principal</h1>
+        <button id="logout-btn" class="bg-red-900 rounded px-4 py-2 text-white text-2xl">Deslogar</button>
+    </div>
+</body>
+
+<script>
+    window.onload = function () {
+        // Verifica se o token está armazenado no localStorage
+        const token = localStorage.getItem('authToken');
+        
+        if (!token) {
+            // Se não houver token, redireciona para o login
+            window.location.href = 'login.html';
+            return;
+        }
+    };
+
+    document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('authToken');
+    window.location.href = 'login.html';
+  });
+</script>
+
+</html>

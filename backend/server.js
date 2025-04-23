@@ -27,6 +27,9 @@ db.connect((err) => {
   console.log('✅ Conectado ao MySQL!');
 });
 
+const jwt = require('jsonwebtoken');  // Adiciona o jwt
+const secretKey = process.env.JWT_SECRET_KEY; // Defina uma chave secreta no .env
+
 // Rota de login
 app.post('/login', (req, res) => {
   const { email, senha } = req.body;
@@ -51,7 +54,9 @@ app.post('/login', (req, res) => {
       }
 
       if (match) {
-        return res.status(200).json({ message: 'Login bem-sucedido!' });
+        // Gerar o JWT
+        const token = jwt.sign({ email: results[0].email, id: results[0].id }, secretKey, { expiresIn: '1h' });
+        return res.status(200).json({ message: 'Login bem-sucedido!', token });
       } else {
         return res.status(401).json({ message: 'E-mail ou senha incorretos!' });
       }
