@@ -56,7 +56,7 @@
         const dados = await resposta.json();
 
         if (resposta.ok) {
-            alert(dados.message); // Exibe: Login bem-sucedido!
+            // alert(dados.message); // Exibe: Login bem-sucedido!
             // Armazena o token no localStorage
             localStorage.setItem('authToken', dados.token);
             // Redireciona para dashboard.html
